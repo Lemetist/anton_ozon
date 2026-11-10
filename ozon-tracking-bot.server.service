@@ -1,0 +1,20 @@
+[Unit]
+Description=Ozon tracking Telegram bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=ozon-track
+Group=ozon-track
+WorkingDirectory=/opt/ozon-tracking-bot
+Environment=HOME=/opt/ozon-tracking-bot
+Environment=PLAYWRIGHT_BROWSERS_PATH=/opt/ozon-tracking-bot/browsers
+Environment=TZ=Europe/Moscow
+ExecStart=/opt/ozon-tracking-bot/.venv/bin/python /opt/ozon-tracking-bot/bot.py
+Restart=on-failure
+RestartSec=30
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
